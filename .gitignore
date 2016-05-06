@@ -1,0 +1,13 @@
+/vendor
+Homestead.yaml
+Homestead.json
+.env
+.DS_Store
+.idea
+public/build/*
+public/js/*
+!public/js/ZeroClipboard.swf
+public/css/*
+npm_debug.log
+node_modules
+db.sqlite
