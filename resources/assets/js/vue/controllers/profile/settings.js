@@ -63,13 +63,13 @@ export default Vue.extend({
         },
 
         updatePassword() {
-            this.updatingProfile = true;
+            this.updatingPassword = true;
 
-            this.$http.put(`/api/users/me/password`, this.profile, (res) => {
+            this.$http.put(`/api/users/me/password`, this.password, (res) => {
                 Notify.success('Password settings have been updated');
                 this.setUser(res.data);
             }).always(() => {
-                this.updatingProfile = false;
+                this.updatingPassword = false;
             });
         }
 

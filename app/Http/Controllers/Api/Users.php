@@ -51,13 +51,16 @@ class Users extends Controller {
         $me = Auth::user();
 
         $this->validate($request, [
-            'new_password' => 'required|min_length:6|confirmed',
+            'new_password' => 'required|min:6|confirmed',
             'current_password' => 'required'
         ]);
 
-        if (!Hash::check($request->old_password, $me->password)) {
+        if (!Hash::check($request->current_password, $me->password)) {
             return $this->respondWithError('Password check failed');
         }
+
+        $me->password = bcrypt($request->new_password);
+        $me->save();
 
         return $this->me();
     }
