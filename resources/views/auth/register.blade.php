@@ -26,7 +26,7 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label">Name</label>
                             <div class="col-md-6">
-                                <input type="text" class="form-control">
+                                <input required type="text" name="name" class="form-control" value="{{ old('name') }}">
                             </div>
                         </div>
 
@@ -40,21 +40,21 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label">E-Mail Address</label>
                             <div class="col-md-6">
-                                <input required type="email" class="form-control">
+                                <input required type="email" name="email" class="form-control" value="{{ old('email') }}">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-md-4 control-label">Password</label>
                             <div class="col-md-6">
-                                <input required type="password" class="form-control">
+                                <input required type="password" name="password" class="form-control">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-md-4 control-label">Confirm Password</label>
                             <div class="col-md-6">
-                                <input required type="password" class="form-control">
+                                <input required type="password" name="password_confirmation" class="form-control">
                             </div>
                         </div>
 
@@ -62,7 +62,7 @@
                             <div class="col-sm-6 col-sm-offset-3">
                                 <div class="checkbox">
                                     <label>
-                                        <input required type="checkbox"> I Accept The <a href="/terms" target="_blank">Terms Of Service</a>
+                                        <input required type="checkbox" name="terms"> I Accept The <a href="/terms" target="_blank">Terms Of Service</a>
                                     </label>
                                 </div>
                             </div>

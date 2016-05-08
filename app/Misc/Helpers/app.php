@@ -33,7 +33,13 @@ function getHomeLink()
         return '/';
     }
 
-    return '/';
+    $user = Auth::user();
+
+    if ($user->isAdmin()) {
+        route('admin.dashboard');
+    }
+
+    return route('customer.dashboard');
 }
 
 function isAdmin()

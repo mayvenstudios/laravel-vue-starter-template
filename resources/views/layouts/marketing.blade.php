@@ -46,9 +46,9 @@
                     </ul>
 
 
-                    {{--<a href="{{ Auth::check() ? getHomeLink() : route('quote') }}" class="btn btn-success">--}}
-                        {{--{{ Auth::check() ? 'My Account' : 'Get A Free Quote' }}--}}
-                    {{--</a>--}}
+                    <a href="{{ Auth::check() ? getHomeLink() : route('login') }}" class="btn btn-success">
+                        {{ Auth::check() ? 'My Account' : 'Log in' }}
+                    </a>
 
                 </div>
             </nav>

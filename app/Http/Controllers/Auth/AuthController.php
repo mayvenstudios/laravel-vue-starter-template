@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Auth;
 
+use App\Models\User;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -102,19 +103,15 @@ class AuthController extends Controller
             'terms' => 'required|accepted',
         ]);
 
-//        $user = $this->users->createUserFromRegistrationRequest($request);
-//
-//        if ($request->team_name) {
-//            $team = $this->teams->create($user, ['name' => $request->team_name]);
-//        }
-//
-//        if ($request->invitation) {
-//            $this->teams->attachUserToTeamByInvitation($request->invitation, $user);
-//        }
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+        ]);
 
-//        Auth::login($user);
+        Auth::login($user);
 
-        return response()->json(['path' => $this->redirectPath()]);
+        return redirect(getHomeLink());
     }
 
     /**
