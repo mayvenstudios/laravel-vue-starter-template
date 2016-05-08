@@ -1,6 +1,4 @@
-<script charset="utf-8" src="//ucarecdn.com/widget/2.5.5/uploadcare/uploadcare.full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
-
 
 @if(isProduction())
     <script src="{{ elixir('js/vendor.js') }}"></script>

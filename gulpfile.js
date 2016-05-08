@@ -23,7 +23,7 @@ elixir(function(mix) {
         'plugins/*.js'
     ], 'public/js/vendor.js');
 
-    //mix.browserify('app.js','public/js/app.js');
+    mix.browserify('app.js','public/js/app.js');
 
     mix.version([
         'public/css/app.css',
