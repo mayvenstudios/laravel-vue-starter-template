@@ -78,4 +78,17 @@ class PasswordController extends Controller
     {
         return $this->postReset($request);
     }
+
+    /**
+     * Get the response for after a successful password reset.
+     *
+     * @param  string  $response
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    protected function getResetSuccessResponse($response)
+    {
+        \Flash::success(trans($response));
+
+        return redirect(getHomeLink());
+    }
 }
