@@ -55,12 +55,12 @@ class AuthController extends Controller
     /**
      * Show the application login form.
      *
-     * @Get("login")
+     * @Get("login", as="auth.login")
      * @return \Illuminate\Http\Response
      */
     public function getLogin()
     {
-        return view('user.login');
+        return view('auth.login');
     }
 
     /**
@@ -84,7 +84,7 @@ class AuthController extends Controller
      */
     public function getRegister(Request $request)
     {
-        return view('user.register');
+        return view('auth.register');
     }
 
     /**

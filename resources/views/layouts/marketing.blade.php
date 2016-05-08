@@ -46,7 +46,7 @@
                     </ul>
 
 
-                    <a href="{{ Auth::check() ? getHomeLink() : route('login') }}" class="btn btn-success">
+                    <a href="{{ Auth::check() ? getHomeLink() : route('auth.login') }}" class="btn btn-success">
                         {{ Auth::check() ? 'My Account' : 'Log in' }}
                     </a>
 

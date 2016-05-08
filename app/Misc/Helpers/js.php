@@ -13,7 +13,7 @@ function getAppUserObject()
     $output = [
         'logged_in' => Auth::check(),
         'user_id' => Auth::check() ? $user->id : null,
-        'admin' => isAdmin(),
+        'mastermind' => isMastermind(),
         'prod' => isProduction(),
         'environment' => App::environment(),
         'email' => Auth::check() ? $user->email : null,

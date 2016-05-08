@@ -1,5 +1,5 @@
 @extends("layouts.platform")
 
 @section("content")
-    <h1>admin dashboard</h1>
+    <h1>Mastermind Dashboard</h1>
 @endsection

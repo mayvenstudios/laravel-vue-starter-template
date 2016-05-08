@@ -7,14 +7,14 @@ use App\Http\Controllers\Controller;
  * Class MarketingController
  * @package App\Http\Controllers
  */
-class CustomerController extends Controller {
+class MastermindController extends Controller {
 
     /**
-     * @Get("/admin", as="admin.dashboard")
+     * @Get("/mastermind", as="mastermind.dashboard")
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function dashboard()
     {
-        return view('admin.dashboard');
+        return view('mastermind.dashboard');
     }
 }

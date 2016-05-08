@@ -4,8 +4,10 @@ var attachedControllers = {};
 var notify = require('./misc/notify');
 
 var mountControllers = (selector) => {
+    console.log(selector);
     $(selector).each((i, el) => {
         var cName = $(el).attr('data-controller');
+        console.log(cName);
         el.id = _.randomStr();
         if (controllers[cName] === undefined) console.warn(`Controller ${cName} is not found`);
         attachedControllers[cName] = new controllers[cName]({el: `#${el.id}`});

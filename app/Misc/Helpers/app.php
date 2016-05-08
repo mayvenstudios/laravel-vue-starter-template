@@ -35,14 +35,19 @@ function getHomeLink()
 
     $user = Auth::user();
 
-    if ($user->isAdmin()) {
+    if ($user->isMastermind()) {
         route('admin.dashboard');
     }
 
     return route('customer.dashboard');
 }
 
-function isAdmin()
+function isCustomer()
 {
-    return Auth::check() && Auth::user()->isAdmin();
+    return Auth::check() && Auth::user()->isCustomer();
+}
+
+function isMastermind()
+{
+    return Auth::check() && Auth::user()->isMastermind();
 }
