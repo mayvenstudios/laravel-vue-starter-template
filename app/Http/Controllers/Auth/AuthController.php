@@ -1,72 +1,155 @@
 <?php
-
 namespace App\Http\Controllers\Auth;
 
-use App\User;
-use Validator;
+use Illuminate\Http\Response;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
+//use CMV\Repositories\Identity\UserRepository;
+//use CMV\Repositories\Identity\TeamRepository;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
+/**
+ * @todo add teams stuff or cleanup commented code
+ * @Middleware("guest", except={"getLogout"})
+ * Class AuthController
+ * @package CMV\Http\Controllers\Auth
+ */
 class AuthController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Registration & Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users, as well as the
-    | authentication of existing users. By default, this controller uses
-    | a simple trait to add these behaviors. Why don't you explore it?
-    |
-    */
-
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
+//    /**
+//     * The user repository instance.
+//     *
+//     * @var UserRepository
+//     */
+//    protected $users;
+
+//    /**
+//     * The team repository instance.
+//     *
+//     * @var TeamRepository
+//     */
+//    protected $teams;
+
     /**
-     * Where to redirect users after login / registration.
+     * The URI for the login route.
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $loginPath = '/login';
 
     /**
      * Create a new authentication controller instance.
-     *
-     * @return void
      */
-    public function __construct()
+    public function __construct(/* UserRepository $users, TeamRepository $teams */)
     {
-        $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
+//        $this->users = $users;
+//        $this->teams = $teams;
     }
 
     /**
-     * Get a validator for an incoming registration request.
+     * Show the application login form.
      *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
+     * @Get("login")
+     * @return \Illuminate\Http\Response
      */
-    protected function validator(array $data)
+    public function getLogin()
     {
-        return Validator::make($data, [
+        return view('user.login');
+    }
+
+    /**
+     * Send the post-authentication response.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Contracts\Auth\Authenticatable  $user
+     * @return \Illuminate\Http\Response
+     */
+    protected function authenticated(Request $request, Authenticatable $user)
+    {
+        return redirect()->intended($this->redirectPath());
+    }
+
+    /**
+     * Show the application registration form.
+     *
+     * @Get("register", as="user.register")
+     * @param  \Illuminate\Http\Request
+     * @return \Illuminate\Http\Response
+     */
+    public function getRegister(Request $request)
+    {
+        return view('user.register');
+    }
+
+    /**
+     * Handle a registration request for the application.
+     *
+     * @Post("register")
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function postRegister(Request $request)
+    {
+        $this->validate($request, [
             'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|confirmed|min:6',
+            'terms' => 'required|accepted',
         ]);
+
+//        $user = $this->users->createUserFromRegistrationRequest($request);
+//
+//        if ($request->team_name) {
+//            $team = $this->teams->create($user, ['name' => $request->team_name]);
+//        }
+//
+//        if ($request->invitation) {
+//            $this->teams->attachUserToTeamByInvitation($request->invitation, $user);
+//        }
+
+//        Auth::login($user);
+
+        return response()->json(['path' => $this->redirectPath()]);
     }
 
     /**
-     * Create a new user instance after a valid registration.
+     * Log the user out of the application.
      *
-     * @param  array  $data
-     * @return User
+     * @Get("logout")
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
-    protected function create(array $data)
+    public function getLogout(Request $request)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+        $request->session()->flush();
+
+        Auth::logout();
+
+        return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/');
+    }
+
+    /**
+     * @Post("login")
+     * @param Request $request
+     * @return Response
+     */
+    public function loginPost(Request $request)
+    {
+        return $this->postLogin($request);
+    }
+
+    /**
+     * Get the post register / login redirect path.
+     *
+     * @return string
+     */
+    public function redirectPath()
+    {
+        return getHomeLink();
     }
 }
