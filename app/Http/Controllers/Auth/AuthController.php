@@ -8,8 +8,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
-//use CMV\Repositories\Identity\UserRepository;
-//use CMV\Repositories\Identity\TeamRepository;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
 /**
@@ -20,21 +18,7 @@ use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
  */
 class AuthController extends Controller
 {
-    use AuthenticatesAndRegistersUsers, ThrottlesLogins;
-
-//    /**
-//     * The user repository instance.
-//     *
-//     * @var UserRepository
-//     */
-//    protected $users;
-
-//    /**
-//     * The team repository instance.
-//     *
-//     * @var TeamRepository
-//     */
-//    protected $teams;
+    use AuthenticatesAndRegistersUsers;
 
     /**
      * The URI for the login route.
@@ -46,11 +30,7 @@ class AuthController extends Controller
     /**
      * Create a new authentication controller instance.
      */
-    public function __construct(/* UserRepository $users, TeamRepository $teams */)
-    {
-//        $this->users = $users;
-//        $this->teams = $teams;
-    }
+    public function __construct() { }
 
     /**
      * Show the application login form.

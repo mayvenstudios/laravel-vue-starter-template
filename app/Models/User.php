@@ -24,9 +24,12 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    /**
+     * @return bool
+     */
     public function isCustomer()
     {
-        return $this->isMastermind();
+        return !$this->isMastermind();
     }
 
     /**

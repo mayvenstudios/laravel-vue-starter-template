@@ -36,7 +36,7 @@ function getHomeLink()
     $user = Auth::user();
 
     if ($user->isMastermind()) {
-        route('admin.dashboard');
+        return route('mastermind.dashboard');
     }
 
     return route('customer.dashboard');

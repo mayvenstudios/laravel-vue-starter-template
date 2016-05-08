@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 
 /**
+ * @Middleware("customer")
  * Class MarketingController
  * @package App\Http\Controllers
  */

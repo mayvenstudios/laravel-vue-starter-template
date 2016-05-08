@@ -162,7 +162,7 @@ return [
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
 
         Aws\Laravel\AwsServiceProvider::class,
-        Bugsnag\BugsnagLaravel\BugsnagLaravelServiceProvider::class,
+//        Bugsnag\BugsnagLaravel\BugsnagLaravelServiceProvider::class,
         Maknz\Slack\SlackServiceProvider::class,
         Spatie\Backup\BackupServiceProvider::class,
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,

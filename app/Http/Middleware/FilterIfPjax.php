@@ -19,11 +19,14 @@ class FilterIfPjax
     public function handle(Request $request, Closure $next)
     {
         $response = $next($request);
+
         if (!$request->pjax() || $response->isRedirection()) {
             return $response;
         }
+
         $this->filterResponse($response, $request->header('X-PJAX-CONTAINER'))
             ->setUriHeader($response, $request);
+
         return $response;
     }
 
