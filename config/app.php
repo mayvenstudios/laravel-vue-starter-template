@@ -157,6 +157,16 @@ return [
 //        App\Providers\RouteServiceProvider::class,
 
         App\Providers\AnnotationsServiceProvider::class,
+        Maknz\Slack\SlackServiceProvider::class,
+        Spatie\Backup\BackupServiceProvider::class,
+        Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
+
+        Aws\Laravel\AwsServiceProvider::class,
+        Bugsnag\BugsnagLaravel\BugsnagLaravelServiceProvider::class,
+        Maknz\Slack\SlackServiceProvider::class,
+        Spatie\Backup\BackupServiceProvider::class,
+        Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
+
     ],
 
     /*
@@ -202,6 +212,11 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+        'AWS' => Aws\Laravel\AwsFacade::class,
+        'Bugsnag' => Bugsnag\BugsnagLaravel\BugsnagFacade::class,
+        'Flash' => App\Misc\Flash::class,
+        'Slack' => 'Maknz\Slack\Facades\Slack',
 
     ],
 
