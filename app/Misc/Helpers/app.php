@@ -9,18 +9,10 @@
 function getMarketingHeaderNavigation()
 {
     return [
-//        [
-//            'text' => 'Developer Daily',
-//            'route-name' => 'blog',
-//        ],
-//        [
-//            'text' => 'Our Methods',
-//            'route-name' => 'methods'
-//        ],
-//        [
-//            'text' => 'Work',
-//            'route-name' => 'our-code'
-//        ],
+        [
+            'text' => 'Page 1',
+            'route-name' => 'marketing.welcome',
+        ],
         [
             'text' => 'Services',
             'route-name' => 'services',

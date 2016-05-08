@@ -1,7 +1,7 @@
 @extends('layouts.marketing')
 
 @section('content')
-<div class="content">
-    <div class="title">About</div>
+<div class="container">
+    <div class="title">About Page</div>
 </div>
 @endsection
