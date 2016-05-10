@@ -5,12 +5,12 @@
     @include('layouts.common.header')
 </head>
 
-@yield('body','<body class="inner">')
+<body class="with-top-navbar">
 
 <div id="wrapper">
     <header id="header">
         <div class="container">
-            <nav class="navbar">
+            <nav class="navbar navbar-inverse navbar-fixed-top app-navbar">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                         <span class="sr-only">Toggle navigation</span>
@@ -18,12 +18,13 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a data-pjax class="navbar-brand" href="/"><span class="sr-only">Code My Views</span></a>
+                    <a class="navbar-brand" href="{{ getHomeLink() }}">
+                        <img src="{{ asset('images/brand.png') }}" alt="brand">
+                    </a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         @foreach(getMarketingHeaderNavigation() as $navigationItem)
-
                             @if(isset($navigationItem['children']))
                                 <li class="{{ set_active_from_route_name( $navigationItem['route-name'] ) }} dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ $navigationItem['text'] }} <span class="fa fa-angle-down"></span></a>
                                     <div class="dropdown-menu">
@@ -41,15 +42,13 @@
                                     <a data-pjax href="{{ route( $navigationItem['route-name'] ) }}">{{ $navigationItem['text'] }}</a>
                                 </li>
                             @endif
-
                         @endforeach
+                        <li>
+                            <a href="{{ Auth::check() ? getHomeLink() : route('auth.login') }}" class="btn btn-success">
+                                {{ Auth::check() ? 'My Account' : 'Log in' }}
+                            </a>
+                        </li>
                     </ul>
-
-
-                    <a href="{{ Auth::check() ? getHomeLink() : route('auth.login') }}" class="btn btn-success">
-                        {{ Auth::check() ? 'My Account' : 'Log in' }}
-                    </a>
-
                 </div>
             </nav>
         </div>
@@ -77,39 +76,6 @@
                         {{--<li><a data-pjax href="{{ route('legal') }}">Privacy Policy</a></li>--}}
                     </ul>
                 </div>
-                {{--<div class="col-lg-8 col-md-7">--}}
-                    {{--<div class="row">--}}
-                        {{--<div class="col-lg-5 col-lg-offset-1 col-sm-7">--}}
-                            {{--<div class="row">--}}
-                                {{--<div class="col-sm-6">--}}
-                                    {{--<h4>About Us</h4>--}}
-                                    {{--<ul class="list-unstyled nav-list">--}}
-                                        {{--<li data-controller="cmv-jobs"><a href="#" class="jobs" v-on:click="step1($event)">Jobs</a></li>--}}
-                                        {{--<li><a data-pjax href="{{ route('about-us') }}">About Us</a></li>--}}
-                                        {{--<li><a data-pjax href="{{ route('methods') }}">Methodology</a></li>--}}
-                                        {{--<li><a data-pjax href="{{ route('our-code') }}">Our Code</a></li>--}}
-                                    {{--</ul>--}}
-                                {{--</div>--}}
-                                {{--<div class="col-sm-6">--}}
-                                    {{--<h4>Developer Daily</h4>--}}
-                                    {{--<ul class="list-unstyled nav-list">--}}
-                                        {{--<li><a data-pjax href="{{ route('blog') }}">Blog Index</a></li>--}}
-                                        {{--<li><a data-pjax href="{{ route('blog.category',['category' => 'ui-ux']) }}">UI/UX</a></li>--}}
-                                        {{--<li><a data-pjax href="{{ route('blog.category', ['category' => 'front-end']) }}">Front End</a></li>--}}
-                                        {{--<li><a data-pjax href="{{ route('blog.category', ['category' => 'branding']) }}">Branding</a></li>--}}
-                                    {{--</ul>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                        {{--<div class="col-lg-6 col-sm-5">--}}
-                            {{--<h4>Live Chat <span id="chat-status" class="state online"></span></h4>--}}
-                            {{--<div class="chat-block">--}}
-                                {{--<p>Talk to one of our developer specialists today for any assistance or information.</p>--}}
-                                {{--<a href="#" class="btn toggle-chat btn-primary btn-chat">START LIVE CHAT</a>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
             </div>
         </div><!-- container-->
     </footer><!-- /footer -->

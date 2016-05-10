@@ -8,7 +8,6 @@
 
 <body class="with-top-navbar">
 
-<div class="growl" id="app-growl"></div>
 <div id="pjax-big-container">
 
 

@@ -24,7 +24,6 @@ export default Vue.extend({
 
     ready() {
         this.fetchUser();
-        console.log('1');
     },
 
     methods: {

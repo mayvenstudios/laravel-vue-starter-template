@@ -2,15 +2,15 @@
 
 @section('content')
 
-    <div class="container-fluid">
-        <a href="{{ route('marketing.welcome') }}" class="app-brand m-b-lg">
-            <img src="{{ asset('images/brand.png') }}" alt="brand">
-        </a>
+    <div class="container-fluid container-fill-height">
+        <div class="container-content-middle container">
 
-        <div class="row">
+            <a href="{{ route('marketing.welcome') }}" class="app-brand m-b-lg">
+                <img src="{{ asset('images/brand.png') }}" alt="brand">
+            </a>
+
             <form class="form-horizontal" method="POST" action="">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Register</div>
+                <div>
                     <div class="panel-body">
                         @if (isset($errors) && count($errors->default) > 0)
                             <div class="alert alert-danger">
@@ -29,13 +29,6 @@
                                 <input required type="text" name="name" class="form-control" value="{{ old('name') }}">
                             </div>
                         </div>
-
-                        {{--<div class="form-group">--}}
-                            {{--<label class="col-md-4 control-label">Team Name</label>--}}
-                            {{--<div class="col-md-6">--}}
-                                {{--<input type="text" class="form-control">--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
 
                         <div class="form-group">
                             <label class="col-md-4 control-label">E-Mail Address</label>

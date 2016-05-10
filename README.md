@@ -45,10 +45,10 @@ server {
 }
 ```
 - cd to the root of the project
-- run `composer istall`
+- run `composer install`
 - run `npm install`
 - copy _.env.example_ to _.env_
-- create a new mysql database to use in the app. By default it's callded _boilerplate_
+- create a new mysql database to use in the app. By default it's called _boilerplate_
 - run `php artisan migrate --seed`
 - at this point you should be able to open the app in your browser
 - run `gulp; gulp watch` and start coding
@@ -61,10 +61,12 @@ server {
 - basic custom middlewares - _mastermind_ & _customer_
 - 2 users - _mastermind@app.dev/password_ & _user@app.dev/password_
 - php
+    - register/login/restore password functionality
     - _App\Jobs\SendEmail_ job - emails should be sent using this
     - _App\Jobs\SendSlackMessage_ job - for sending slack messages
     - rest api routes. There're several helper methods to return json data - `return $this->respondWith*()`
+    - handy helpers - _/app/misc/helpers/*_. Be sure to check them out
 - javascript
     - [pjax links](https://github.com/defunkt/jquery-pjax). To make a pjax link just add a [data-pjax] attribute to it. Once clicked it will replace contents of #pjax-container with dynamically loaded html
-    - vue.js app structure . To code a new page just add a [data-controller=controller/name] attribute to the parent div & include it in _/resources/js/vue/controllers.js_. There's an example controller that handles the profile page.
+    - vue.js app structure . To code a new page just add a [data-controller=controller/name] attribute to the parent div & include it in _/resources/js/vue/controllers.js_. There's an example controller that handles the profile page (when logged in - _/settings_).
     - _/resources/js/misc/notify.js_ - helper library to show notifications and confirmation popups

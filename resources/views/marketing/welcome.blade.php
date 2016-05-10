@@ -2,6 +2,6 @@
 
 @section("content")
     <div class="container">
-        <div class="title">Welcome page</div>
+        <h1>Welcome Page</h1>
     </div>
 @endsection
