@@ -1,27 +1,70 @@
-# Laravel PHP Framework
+# Laravel Vue Starter
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+## Setting up
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+- set up a virtual host. You can either do it using [homestead built-in tools](https://laravel.com/docs/5.2/homestead#configuring-homestead) or by hand. Make sure to edit your _/etc/hosts_ file.
+- Example _nginx.conf_:
+```
+server {
+    listen 80;
+    server_name lv-starter.dev;
+    root "/www/laravel-vue-starter-template/public";
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+    index index.html index.htm index.php;
 
-## Official Documentation
+    charset utf-8;
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
 
-## Contributing
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location = /robots.txt  { access_log off; log_not_found off; }
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+    access_log off;
+    error_log  /var/log/nginx/lv-starter.local-error.log error;
 
-## Security Vulnerabilities
+    sendfile off;
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+    client_max_body_size 100m;
 
-## License
+    location ~ \.php$ {
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_pass unix:/var/run/php5-fpm.sock;
+        fastcgi_index index.php;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_intercept_errors off;
+        fastcgi_buffer_size 16k;
+        fastcgi_buffers 4 16k;
+    }
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+    location ~ /\.ht {
+        deny all;
+    }
+}
+```
+- cd to the root of the project
+- run `composer istall`
+- run `npm install`
+- copy _.env.example_ to _.env_
+- create a new mysql database to use in the app. By default it's callded _boilerplate_
+- run `php artisan migrate --seed`
+- at this point you should be able to open the app in your browser
+- run `gulp; gulp watch` and start coding
+
+## What's inside
+
+- [bugsnag integration]()https://github.com/bugsnag/bugsnag-laravel. To enable it add a BUGNSAG_API_KEY variable in _.env_ and uncomment _/config/app.php:164_
+- [slack integration](https://github.com/maknz/slack). To enable it create a webhook and set a SLACK_ENDPOINT variable in _.env_
+- email integration - the configuration is pretty straightforward. Check out EMAIL_* variables in .env
+- basic custom middlewares - _mastermind_ & _customer_
+- 2 users - _mastermind@app.dev/password_ & _user@app.dev/password_
+- php
+    - _App\Jobs\SendEmail_ job - emails should be sent using this
+    - _App\Jobs\SendSlackMessage_ job - for sending slack messages
+    - rest api routes. There're several helper methods to return json data - `return $this->respondWith*()`
+- javascript
+    - [pjax links](https://github.com/defunkt/jquery-pjax). To make a pjax link just add a [data-pjax] attribute to it. Once clicked it will replace contents of #pjax-container with dynamically loaded html
+    - vue.js app structure . To code a new page just add a [data-controller=controller/name] attribute to the parent div & include it in _/resources/js/vue/controllers.js_. There's an example controller that handles the profile page.
+    - _/resources/js/misc/notify.js_ - helper library to show notifications and confirmation popups
